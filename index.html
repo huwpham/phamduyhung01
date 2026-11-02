@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phạm Duy Hưng - IT Student Portfolio | Đại học Bình Dương</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Font Inter & Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <!-- Link File CSS riêng -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 min-h-screen relative overflow-x-hidden">
+
+    <!-- Glowing Background Orbs -->
+    <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 right-1/4 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[180px] pointer-events-none -z-10"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-slate-950/70 backdrop-blur-md border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-slate-950 shadow-lg shadow-cyan-500/20 font-mono">
+                    DH
+                </div>
+                <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                    Phạm Duy Hưng
+                </span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">Giới thiệu</a>
+                <a href="#stats" class="hover:text-cyan-400 transition-colors">Học vấn & GPA</a>
+                <a href="#hobbies" class="hover:text-cyan-400 transition-colors">Sở thích</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Dự án</a>
+                <a href="#games" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-amber-400 hover:text-amber-300">
+                    <i data-lucide="gamepad-2" class="w-4 h-4"></i> Mini Games
+                </a>
+                <a href="#contact-section" class="hover:text-cyan-400 transition-colors">Gửi Tin Nhắn</a>
+                <button onclick="openModal('contact-modal')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all duration-200">
+                    Liên hệ nhanh
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-28 pb-16 md:pt-36 md:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs sm:text-sm font-medium">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    Sinh viên Đại học Bình Dương (BDU)
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Xin chào! Tôi là <br>
+                    <span class="bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                        Phạm Duy Hưng
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-slate-400 font-light leading-relaxed max-w-2xl">
+                    Sinh viên ngành <strong class="text-slate-200 font-semibold">Công nghệ thông tin</strong> đam mê phát triển phần mềm, xây dựng giao diện web độc đáo và sáng tạo mini game. Luôn chủ động rèn luyện tư duy lập trình và giữ tinh thần thể thao năng động.
+                </p>
+
+                <!-- Key Quick Info Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                    <div class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                        <div class="text-xs text-slate-400">MSSV</div>
+                        <div class="text-base font-bold text-cyan-400 font-mono">25050025</div>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                        <div class="text-xs text-slate-400">Trường</div>
+                        <div class="text-sm font-bold text-slate-200 truncate" title="Đại học Bình Dương">ĐH Bình Dương</div>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                        <div class="text-xs text-slate-400">Điểm GPA tích lũy</div>
+                        <div class="text-base font-bold text-emerald-400 font-mono">3.65 / 4.0</div>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                        <div class="text-xs text-slate-400">Địa chỉ</div>
+                        <div class="text-sm font-bold text-indigo-300 truncate" title="Bình Dương / TP.HCM">Bình Dương, VN</div>
+                    </div>
+                </div>
+
+                <!-- CTA Actions -->
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#contact-section" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i> Gửi Tin Nhắn Cho Hưng
+                    </a>
+                    <button onclick="openModal('contact-modal')" class="px-6 py-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-medium transition-all flex items-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i> Thông tin liên hệ
+                    </button>
+                    <a href="#games" class="px-5 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium hover:bg-amber-500/20 transition-all flex items-center gap-2">
+                        <i data-lucide="gamepad" class="w-4 h-4"></i> Chơi Game
+                    </a>
+                </div>
+            </div>
+
+            <!-- Avatar 3D Card with Hold-to-Rotate Feature -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition duration-500 group-hover:duration-200 animate-tilt"></div>
+                    
+                    <div class="hold-rotatable relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-3xl bg-slate-900 border border-slate-700/80 overflow-hidden shadow-2xl flex flex-col justify-between p-6 cursor-pointer select-none">
+                        
+                        <div class="flex justify-between items-start z-10">
+                            <span class="px-3 py-1 rounded-full bg-slate-800/90 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-semibold">
+                                BDU • CNTT
+                            </span>
+                            <div class="px-2 py-1 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs flex items-center gap-1 font-semibold">
+                                <i data-lucide="award" class="w-3.5 h-3.5"></i> GPA 3.65
+                            </div>
+                        </div>
+
+                        <!-- Card Center Graphic -->
+<div class="my-auto text-center space-y-4">
+    <div class="relative w-44 h-56 mx-auto">
+        <!-- Viền phát sáng chữ nhật -->
+        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-500 opacity-75 blur-md animate-pulse"></div>
+        
+        <!-- Khung chứa ảnh chân dung hình chữ nhật -->
+        <div class="relative w-full h-full rounded-2xl bg-slate-950 p-1.5 border border-cyan-400/50 overflow-hidden shadow-lg">
+            <img src="1791879003935_612750935457984175_1129134080636076676_7fa886baa60f71ffd2666d15a9b403ed.jpg" alt="Phạm Duy Hưng" class="w-full h-full object-contain rounded-xl bg-slate-900">
+        </div>
+    </div>
+
+    <div>
+        <h3 class="text-2xl font-bold text-white">Phạm Duy Hưng</h3>
+        <p class="text-sm text-cyan-400 font-mono">MSSV: 25050025</p>
+        <p class="text-xs text-slate-400 mt-1">Đại học Bình Dương</p>
+    </div>
+</div>
+
+                        <!-- Instruction badge inside avatar -->
+                        <div class="z-10 text-center py-2 px-3 rounded-xl bg-slate-950/80 border border-slate-800 text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
+                            <i data-lucide="rotate-3d" class="w-3.5 h-3.5 text-cyan-400"></i>
+                            <span class="text-slate-300">Giữ chuột / Chạm để xoay 3D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GPA & Academic Details Section -->
+    <section id="stats" class="py-16 bg-slate-900/40 border-y border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Học Vấn & Điểm Số Tích Lũy</h2>
+                <p class="text-slate-400 text-sm mt-2">Thông tin quá trình học tập tại Khoa CNTT - Trường Đại học Bình Dương (BDU)</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: GPA Detail -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold">Xuất sắc</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white font-mono">3.65 <span class="text-sm font-normal text-slate-400">/ 4.0</span></div>
+                    <div class="text-sm font-medium text-slate-300 mt-1">GPA Tích Lũy Ngành CNTT</div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-800 rounded-full h-2.5 mt-4 overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-2.5 rounded-full" style="width: 91.25%"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-500 mt-1.5 font-mono">
+                        <span>Quy đổi: 91.25%</span>
+                        <span>Đại học Bình Dương</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Student ID & Major -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
+                            <i data-lucide="id-card" class="w-6 h-6"></i>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold">Chính quy</span>
+                    </div>
+                    <div class="text-2xl font-bold text-white font-mono">MSSV: 25050025</div>
+                    <div class="text-sm font-medium text-slate-300 mt-1">Chuyên ngành: Công Nghệ Thông Tin</div>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                        Đang theo học các môn cơ sở ngành và chuyên sâu: Cấu trúc dữ liệu & Giải thuật, Lap trình Web, Cơ sở dữ liệu, Mạng máy tính.
+                    </p>
+                </div>
+
+                <!-- Card 3: Address & Location -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold">Việt Nam</span>
+                    </div>
+                    <div class="text-xl font-bold text-white">Bình Dương / TP.HCM</div>
+                    <div class="text-sm font-medium text-slate-300 mt-1">Đại học Bình Dương (BDU)</div>
+                    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                        Sẵn sàng tham gia các dự án thực tập, làm việc remote hoặc trực tiếp tại khu vực Bình Dương & TP. Hồ Chí Minh.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Lifestyle & Energy</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Sở Thích Cá Nhân</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md mt-2 md:mt-0">
+                Thúc đẩy sự cân bằng giữa tư duy logic lập trình và thể lực dẻo dai.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Hobby 1: Badminton -->
+            <div class="hold-rotatable group relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden cursor-pointer">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80" alt="Cầu lông" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-emerald-500/80 backdrop-blur-md text-slate-950 font-bold text-xs">
+                        Cầu Lông 🏸
+                    </span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">Đánh Cầu Lông</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                        Tập luyện phản xạ nhanh, di chuyển linh hoạt và rèn luyện sức bền sau những giờ làm việc với dòng code.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hobby 2: Volleyball -->
+            <div class="hold-rotatable group relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden cursor-pointer">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=800&q=80" alt="Bóng chuyền" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-cyan-500/80 backdrop-blur-md text-slate-950 font-bold text-xs">
+                        Bóng Chuyền 🏐
+                    </span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">Bóng Chuyền</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                        Nâng cao tinh thần đồng đội (Teamwork), khả năng phối hợp tác chiến và những cú bật đập bóng bứt phá.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hobby 3: Gaming -->
+            <div class="hold-rotatable group relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden cursor-pointer">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80" alt="Gaming" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-500/80 backdrop-blur-md text-white font-bold text-xs">
+                        Gaming 🎮
+                    </span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">Chơi Game & Giải Trí</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                        Yêu thích các tựa game chiến thuật, MOBA và Indie. Đồng thời nghiên cứu thiết kế game mechanics đơn giản.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-slate-900/30 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Portfolio</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Dự Án Cá Nhân Đã Thực Hiện</h2>
+                <p class="text-slate-400 text-sm mt-2">Một số dự án tiêu biểu ứng dụng kiến thức CNTT tại BDU</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 bg-slate-800 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80" alt="Dự án Web" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[11px] font-mono text-cyan-400 font-semibold uppercase">Web Application</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Hệ Thống Quản Lý Sinh Viên BDU</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                Ứng dụng web giúp sinh viên tra cứu lịch học, quản lý điểm số GPA và đăng ký tín chỉ trực tuyến dễ dàng.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mt-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">HTML/CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="alert('Dự án mô phỏng cho hồ sơ sinh viên Duy Hưng!')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition">Xem chi tiết</button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 bg-slate-800 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=700&q=80" alt="Dự án Game" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[11px] font-mono text-purple-400 font-semibold uppercase">Canvas HTML5 Game</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Bộ Mini Game Thể Thao Interactive</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                Tích hợp game Đánh bóng chuyền 2D và Game Chạy né deadline được xây dựng bằng JavaScript thuần.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mt-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">HTML5 Canvas</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">JS ES6</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">Game Engine</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="#games" class="block text-center w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition">Trải nghiệm ngay</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 bg-slate-800 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=700&q=80" alt="Dự án IT Tool" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[11px] font-mono text-emerald-400 font-semibold uppercase">Algorithm Tool</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Công Cụ Tính Điểm GPA & Tín Chỉ BDU</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                Tiện ích tự động tính toán điểm trung bình tích lũy hệ 4 và hệ 10 dành riêng cho sinh viên Đại học Bình Dương.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mt-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">Algorithms</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">LocalStorage</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="alert('Tính năng đang phát triển!')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition">Xem chi tiết</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Mini Games Section -->
+    <section id="games" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold">Góc Giải Trí Chill</span>
+            <h2 class="text-3xl font-extrabold text-white mt-3">2 Mini Games Vui Nhẹ Nhàng</h2>
+            <p class="text-slate-400 text-sm mt-2">Thư giãn và trải nghiệm game ngay trên hồ sơ của Duy Hưng!</p>
+        </div>
+
+        <!-- Game Selector Tabs -->
+        <div class="flex justify-center gap-3 mb-8">
+            <button id="tab-game1" onclick="switchGame(1)" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20">
+                🏐 Bóng Chuyền Bãi Biển
+            </button>
+            <button id="tab-game2" onclick="switchGame(2)" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-400 hover:text-white">
+                🏃 Chạy Né Deadline
+            </button>
+        </div>
+
+        <!-- Game Container Box -->
+        <div class="max-w-3xl mx-auto rounded-3xl bg-slate-900 border border-slate-800 p-4 sm:p-6 shadow-2xl relative">
+            
+            <!-- Game 1 View -->
+            <div id="game1-container" class="space-y-4">
+                <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+                    <span>Điều khiển: Phím Mũi Tên Trái/Phải hoặc A/D | Nhảy: W / Mũi tên lên</span>
+                    <span id="game1-score" class="text-sm font-bold text-cyan-400">Score: 0</span>
+                </div>
+                <canvas id="volleyballCanvas" width="700" height="380" class="w-full h-[320px] sm:h-[380px] bg-slate-950 rounded-2xl border border-slate-800 cursor-pointer"></canvas>
+                <div class="flex justify-center gap-4">
+                    <button onclick="startVolleyballGame()" class="px-6 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-sm hover:bg-cyan-400 transition">
+                        Bắt Đầu Chơi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game 2 View (Hidden by default) -->
+            <div id="game2-container" class="space-y-4 hidden">
+                <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+                    <span>Nhảy: Phím Space / Mũi tên lên / Bấm vào màn hình</span>
+                    <span id="game2-score" class="text-sm font-bold text-amber-400">Score: 0</span>
+                </div>
+                <canvas id="runnerCanvas" width="700" height="380" class="w-full h-[320px] sm:h-[380px] bg-slate-950 rounded-2xl border border-slate-800 cursor-pointer"></canvas>
+                <div class="flex justify-center gap-4">
+                    <button onclick="startRunnerGame()" class="px-6 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm hover:bg-amber-400 transition">
+                        Chạy Ngay
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Direct Message Form Section -->
+    <section id="contact-section" class="py-20 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Get In Touch</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Gửi Tin Nhắn Trực Tiếp Cho Duy Hưng</h2>
+                <p class="text-slate-400 text-sm mt-2">Bạn có thể để lại lời nhắn, câu hỏi hoặc cơ hội hợp tác tại đây!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Info Side -->
+                <div class="md:col-span-5 space-y-6 bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="user-check" class="w-5 h-5 text-cyan-400"></i> Kênh Kết Nối
+                    </h3>
+
+                    <div class="space-y-4 text-xs text-slate-300">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="school" class="w-4 h-4 text-cyan-400 mt-0.5"></i>
+                            <div>
+                                <div class="font-semibold text-white">Đại Học Bình Dương</div>
+                                <div class="text-slate-400">Sinh viên ngành CNTT (MSSV: 25050025)</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-cyan-400 mt-0.5"></i>
+                            <div>
+                                <div class="font-semibold text-white">Email Cá Nhân</div>
+                                <div class="text-slate-400 font-mono">duyhung.25050025@bdu.edu.vn</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400 mt-0.5"></i>
+                            <div>
+                                <div class="font-semibold text-white">Địa Chỉ</div>
+                                <div class="text-slate-400">Bình Dương / TP. Hồ Chí Minh, Việt Nam</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-800">
+                        <div class="text-xs font-semibold text-slate-400 mb-2">Mạng xã hội:</div>
+                        <div class="flex gap-2">
+                            <a href="#" class="p-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 hover:text-cyan-400 text-slate-300 transition">
+                                <i data-lucide="github" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#" class="p-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 hover:text-cyan-400 text-slate-300 transition">
+                                <i data-lucide="facebook" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#" class="p-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 hover:text-cyan-400 text-slate-300 transition">
+                                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="md:col-span-7 bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-800 relative">
+                    <form id="direct-message-form" class="space-y-4" onsubmit="handleSendMessage(event)">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Họ và tên của bạn *</label>
+                            <input type="text" id="msg-name" required placeholder="Nhập tên của bạn..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 text-sm text-white placeholder-slate-600 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Email hoặc Số điện thoại *</label>
+                            <input type="text" id="msg-contact" required placeholder="example@gmail.com / 090xxx..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 text-sm text-white placeholder-slate-600 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Tiêu đề tin nhắn</label>
+                            <input type="text" id="msg-subject" placeholder="VD: Đề xuất công việc / Hỏi về dự án..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 text-sm text-white placeholder-slate-600 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Nội dung tin nhắn *</label>
+                            <textarea id="msg-content" required rows="4" placeholder="Nhập lời nhắn gửi đến Phạm Duy Hưng..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 text-sm text-white placeholder-slate-600 outline-none transition resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition duration-200 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i> Gửi Lời Nhắn
+                        </button>
+                    </form>
+
+                    <!-- Success Message Alert (Hidden by default) -->
+                    <div id="msg-success" class="hidden absolute inset-0 bg-slate-900/95 rounded-2xl flex flex-col items-center justify-center p-6 text-center z-20">
+                        <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center mb-4 animate-bounce">
+                            <i data-lucide="check" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Tin nhắn đã được gửi!</h4>
+                        <p class="text-xs text-slate-400 mt-2 max-w-xs">Cảm ơn bạn đã gửi lời nhắn cho Duy Hưng. Hưng sẽ phản hồi trong thời gian sớm nhất!</p>
+                        <button onclick="resetMessageForm()" class="mt-6 px-5 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700 transition">
+                            Gửi tin nhắn khác
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-950 border-t border-slate-900 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 Phạm Duy Hưng • MSSV: 25050025 • Sinh viên CNTT Đại học Bình Dương (BDU)</p>
+        </div>
+    </footer>
+
+    <!-- Contact Quick Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full relative">
+            <button onclick="closeModal('contact-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <h3 class="text-xl font-bold text-white mb-4">Thông tin liên hệ nhanh</h3>
+            
+            <div class="space-y-3 text-sm">
+                <div class="p-3 rounded-xl bg-slate-950 flex items-center justify-between border border-slate-800">
+                    <div>
+                        <div class="text-xs text-slate-400">Email</div>
+                        <div class="font-mono text-cyan-400 font-medium">duyhung.25050025@bdu.edu.vn</div>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('duyhung.25050025@bdu.edu.vn'); alert('Đã copy Email!')" class="p-2 text-slate-400 hover:text-white">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="p-3 rounded-xl bg-slate-950 flex items-center justify-between border border-slate-800">
+                    <div>
+                        <div class="text-xs text-slate-400">Số điện thoại</div>
+                        <div class="font-mono text-emerald-400 font-medium">+84 908 123 456</div>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('0908123456'); alert('Đã copy SĐT!')" class="p-2 text-slate-400 hover:text-white">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="closeModal('contact-modal')" class="w-full mt-6 py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold transition">
+                Đóng
+            </button>
+        </div>
+    </div>
+
+    <!-- Link File JS riêng -->
+    <script src="script.js"></script>
+</body>
+</html>

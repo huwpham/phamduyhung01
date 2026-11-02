@@ -1,0 +1,67 @@
+/* Tùy chỉnh hiệu ứng cuộn trang mượt mà */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+}
+
+/* Hiệu ứng Shockwave Ripple khi Click */
+.shockwave-ripple {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border: 2px solid rgba(6, 182, 212, 0.8);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+    animation: shockwaveAnim 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    z-index: 9999;
+}
+
+@keyframes shockwaveAnim {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+    }
+    100% {
+        width: 180px;
+        height: 180px;
+        opacity: 0;
+    }
+}
+
+/* Hiệu ứng xoay 3D khi giữ chuột (Hold & Rotate) */
+.hold-rotatable {
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.hold-rotatable.holding {
+    animation: continuousRotate 4s linear infinite;
+    box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
+}
+
+@keyframes continuousRotate {
+    0% {
+        transform: perspective(1000px) rotateY(0deg) scale(1.03);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg) scale(1.03);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg) scale(1.03);
+    }
+}

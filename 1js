@@ -1,0 +1,304 @@
+// Khởi tạo Lucide Icons
+document.addEventListener("DOMContentLoaded", () => {
+    lucide.createIcons();
+    initClickShockwave();
+    initHoldRotateEffect();
+    initVolleyballGame();
+    initRunnerGame();
+});
+
+/* ============================================================
+   1. HIỆU ỨNG NỐI TƯƠNG TÁC (Shockwave Click & Hold-to-Rotate)
+   ============================================================ */
+
+function initClickShockwave() {
+    window.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.className = 'shockwave-ripple';
+        ripple.style.left = `${e.clientX}px`;
+        ripple.style.top = `${e.clientY}px`;
+        document.body.appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+}
+
+function initHoldRotateEffect() {
+    const rotatableCards = document.querySelectorAll('.hold-rotatable');
+
+    rotatableCards.forEach(card => {
+        let holdTimer = null;
+
+        const startHold = () => {
+            holdTimer = setTimeout(() => {
+                card.classList.add('holding');
+            }, 150);
+        };
+
+        const stopHold = () => {
+            clearTimeout(holdTimer);
+            card.classList.remove('holding');
+        };
+
+        card.addEventListener('mousedown', startHold);
+        card.addEventListener('mouseup', stopHold);
+        card.addEventListener('mouseleave', stopHold);
+
+        card.addEventListener('touchstart', startHold, { passive: true });
+        card.addEventListener('touchend', stopHold);
+    });
+}
+
+/* ============================================================
+   2. XỬ LÝ MODAL VÀ FORM GỬI TIN NHẮN
+   ============================================================ */
+
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) modal.classList.remove('hidden');
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) modal.classList.add('hidden');
+}
+
+function handleSendMessage(event) {
+    event.preventDefault();
+    
+    // Bắn pháo hoa hiệu ứng Confetti
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    }
+
+    // Hiển thị khung báo thành công
+    document.getElementById('msg-success').classList.remove('hidden');
+}
+
+function resetMessageForm() {
+    document.getElementById('direct-message-form').reset();
+    document.getElementById('msg-success').classList.add('hidden');
+}
+
+/* ============================================================
+   3. CHUYỂN ĐỔI MINI GAMES
+   ============================================================ */
+
+function switchGame(gameNum) {
+    const g1 = document.getElementById('game1-container');
+    const g2 = document.getElementById('game2-container');
+    const tab1 = document.getElementById('tab-game1');
+    const tab2 = document.getElementById('tab-game2');
+
+    if (gameNum === 1) {
+        g1.classList.remove('hidden');
+        g2.classList.add('hidden');
+        tab1.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20";
+        tab2.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-400 hover:text-white";
+    } else {
+        g1.classList.add('hidden');
+        g2.classList.remove('hidden');
+        tab2.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20";
+        tab1.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-400 hover:text-white";
+    }
+}
+
+/* ============================================================
+   4. GAME 1: BÓNG CHUYỀN BÃI BIỂN
+   ============================================================ */
+
+let vCanvas, vCtx;
+let vPlayer = { x: 100, y: 300, w: 30, h: 50, vy: 0, isJumping: false };
+let vBall = { x: 350, y: 150, vx: 3, vy: -2, radius: 12 };
+let vScore = 0;
+let vGameLoop = null;
+
+function initVolleyballGame() {
+    vCanvas = document.getElementById('volleyballCanvas');
+    if(!vCanvas) return;
+    vCtx = vCanvas.getContext('2d');
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'd') vPlayer.x += 18;
+        if (e.key === 'ArrowLeft' || e.key === 'a') vPlayer.x -= 18;
+        if ((e.key === 'ArrowUp' || e.key === 'w') && !vPlayer.isJumping) {
+            vPlayer.vy = -12;
+            vPlayer.isJumping = true;
+        }
+    });
+
+    renderVGameStatic();
+}
+
+function startVolleyballGame() {
+    vScore = 0;
+    vBall = { x: 350, y: 100, vx: 3.5, vy: -2, radius: 12 };
+    vPlayer.x = 100;
+    if(vGameLoop) cancelAnimationFrame(vGameLoop);
+    updateVolleyball();
+}
+
+function updateVolleyball() {
+    // Gravity & Physics
+    vPlayer.y += vPlayer.vy;
+    if (vPlayer.y < 300) {
+        vPlayer.vy += 0.6;
+    } else {
+        vPlayer.y = 300;
+        vPlayer.vy = 0;
+        vPlayer.isJumping = false;
+    }
+
+    // Ball movement
+    vBall.x += vBall.vx;
+    vBall.y += vBall.vy;
+    vBall.vy += 0.25; // gravity ball
+
+    // Ball Wall Bounce
+    if (vBall.x - vBall.radius < 0 || vBall.x + vBall.radius > vCanvas.width) vBall.vx *= -1;
+    if (vBall.y - vBall.radius < 0) vBall.vy *= -1;
+
+    // Ball Ground Collision
+    if (vBall.y + vBall.radius > 350) {
+        vBall.y = 350 - vBall.radius;
+        vBall.vy *= -0.7;
+    }
+
+    // Player Ball Hit Check
+    let dx = vBall.x - (vPlayer.x + vPlayer.w / 2);
+    let dy = vBall.y - (vPlayer.y + vPlayer.h / 2);
+    if (Math.abs(dx) < 30 && Math.abs(dy) < 35) {
+        vBall.vy = -8;
+        vBall.vx = dx * 0.3;
+        vScore += 10;
+        document.getElementById('game1-score').innerText = `Score: ${vScore}`;
+    }
+
+    // Draw
+    vCtx.clearRect(0, 0, vCanvas.width, vCanvas.height);
+
+    // Sand Ground
+    vCtx.fillStyle = '#1e293b';
+    vCtx.fillRect(0, 350, vCanvas.width, 30);
+
+    // Player
+    vCtx.fillStyle = '#06b6d4';
+    vCtx.fillRect(vPlayer.x, vPlayer.y, vPlayer.w, vPlayer.h);
+
+    // Volleyball
+    vCtx.beginPath();
+    vCtx.arc(vBall.x, vBall.y, vBall.radius, 0, Math.PI * 2);
+    vCtx.fillStyle = '#f59e0b';
+    vCtx.fill();
+    vCtx.closePath();
+
+    vGameLoop = requestAnimationFrame(updateVolleyball);
+}
+
+function renderVGameStatic() {
+    vCtx.fillStyle = '#020617';
+    vCtx.fillRect(0, 0, vCanvas.width, vCanvas.height);
+    vCtx.fillStyle = '#94a3b8';
+    vCtx.font = '14px sans-serif';
+    vCtx.fillText('Bấm "Bắt Đầu Chơi" để chơi Bóng Chuyền 🏐', 210, 190);
+}
+
+/* ============================================================
+   5. GAME 2: RUNNER NÉ DEADLINE
+   ============================================================ */
+
+let rCanvas, rCtx;
+let rPlayer = { y: 290, vy: 0, isJumping: false };
+let rObstacles = [];
+let rScore = 0;
+let rGameLoop = null;
+
+function initRunnerGame() {
+    rCanvas = document.getElementById('runnerCanvas');
+    if(!rCanvas) return;
+    rCtx = rCanvas.getContext('2d');
+
+    const jump = () => {
+        if (!rPlayer.isJumping) {
+            rPlayer.vy = -11;
+            rPlayer.isJumping = true;
+        }
+    };
+
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.key === 'ArrowUp') jump();
+    });
+    rCanvas.addEventListener('click', jump);
+
+    renderRGameStatic();
+}
+
+function startRunnerGame() {
+    rScore = 0;
+    rObstacles = [];
+    rPlayer.y = 290;
+    if (rGameLoop) cancelAnimationFrame(rGameLoop);
+    updateRunner();
+}
+
+function updateRunner() {
+    rPlayer.y += rPlayer.vy;
+    if (rPlayer.y < 290) {
+        rPlayer.vy += 0.6;
+    } else {
+        rPlayer.y = 290;
+        rPlayer.vy = 0;
+        rPlayer.isJumping = false;
+    }
+
+    // Spawn Obstacles (Deadline Bugs)
+    if (Math.random() < 0.02) {
+        rObstacles.push({ x: rCanvas.width, w: 20, h: 30 });
+    }
+
+    rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
+
+    // Ground line
+    vCtx.fillStyle = '#334155';
+    rCtx.fillRect(0, 320, rCanvas.width, 60);
+
+    // Player
+    rCtx.fillStyle = '#f59e0b';
+    rCtx.fillRect(80, rPlayer.y, 30, 30);
+
+    // Move & Draw Obstacles
+    for (let i = 0; i < rObstacles.length; i++) {
+        let obs = rObstacles[i];
+        obs.x -= 6;
+        rCtx.fillStyle = '#ef4444';
+        rCtx.fillRect(obs.x, 290, obs.w, obs.h);
+
+        // Check collision
+        if (obs.x < 110 && obs.x > 50 && rPlayer.y > 260) {
+            alert(`Game Over! Điểm số của bạn: ${rScore}`);
+            cancelAnimationFrame(rGameLoop);
+            return;
+        }
+    }
+
+    rObstacles = rObstacles.filter(o => o.x > -30);
+
+    rScore++;
+    document.getElementById('game2-score').innerText = `Score: ${rScore}`;
+
+    rGameLoop = requestAnimationFrame(updateRunner);
+}
+
+function renderRGameStatic() {
+    rCtx.fillStyle = '#020617';
+    rCtx.fillRect(0, 0, rCanvas.width, rCanvas.height);
+    rCtx.fillStyle = '#94a3b8';
+    rCtx.font = '14px sans-serif';
+    rCtx.fillText('Bấm "Chạy Ngay" để bắt đầu Né Deadline 🏃', 210, 190);
+}
